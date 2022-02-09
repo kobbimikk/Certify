@@ -7,6 +7,8 @@ environment:
       MSYS2_ARCH: x86_64
       MSYS2_BITS: 64
 
+build:
+  publish_nuget: true
 #init:
 #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
