@@ -14,16 +14,19 @@ nuget:
 
 build:
   publish_nuget: true
-#init:
-#  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
   - ps: Add-AppveyorMessage "This is a test message"
 
+before_build:
+  - nuget restore
+
 build_script:
   - msbuild Certify.sln /property:Configuration=Release
   - 7z a cbuild.zip  %APPVEYOR_BUILD_FOLDER%\Certify\bin\*
-#  - ps: Start-Sleep -s 3609
+  - ps: Start-Sleep -s 3609
   
 artifacts:
   - path: cbuild.zip
